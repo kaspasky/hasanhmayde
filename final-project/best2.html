@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>best-seller</title>
+    <link rel="stylesheet" href="pro.css" />
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/js/all.min.js"
+      crossorigin="anonymous"
+    ></script>
+  </head>
+  <body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+      <i class="fas fa-bars menu-icon" onclick="toggleSidebar()"></i>
+
+      <div class="logo">
+        <img
+          src="images/logo1.avif"
+          alt="Logo"
+          style="width: 111px; height: 55px"
+        />
+      </div>
+
+      <div class="icons">
+        <img
+          src="icons/search-interface-symbol.png"
+          alt="Search"
+          style="width: 30px; height: 30px"
+        />
+
+        <button onclick="toggleCart()"> 
+          <img src="icons/shopping-bag.png" alt="Cart" style="width: 30px; height: 30px;" />
+      </button>
+      
+      <div class="cart-container" id="cart-container" style="display: none;">
+        <h2>Shopping Cart</h2>
+        <ul id="cart-list"></ul>
+        <p>Total: $<span id="total">0</span></p>
+        <button onclick="clearCart()">Clear Cart</button>
+        <button onclick="toggleCart()">Close</button>
+    </div>
+    
+        
+        <div class="currency">
+          <select
+            name="currency"
+            id="currency"
+            style="
+              border: none;
+              background: transparent;
+              font-size: 16px;
+              color: #8c7a57;
+            "
+          >
+            <option value="USD">Select Currency</option>
+            <option value="USD">USD<img href="" /></option>
+            <option value="EUR">EUR</option>
+            <option value="GBP">LEB</option>
+          </select>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Sidebar -->
+    <div class="sidebar" id="sidebar">
+      <i class="fas fa-times close-btn" onclick="toggleSidebar()"></i>
+      <ul>
+        <li><a href="pro.html">HOME</a></li>
+        <li><a href="products.html">SHOP</a></li>
+        <li><a href="contact.html">CONTACT</a></li>
+      </ul>
+    </div>
+
+    <section class="best-seller">
+        <h2>OUR BEST SELLER</h2>
+        <div class="best-seller2-container">
+          <div class="best-seller2-item">
+            <img
+              src="images/p1.jpg"
+              alt="Best Seller 2"
+              style="height: 400px; width: 400px"
+            />
+          </div>
+          <div class="description" style="
+          margin-left: 80px;
+          margin-top: 160px;">
+          <p>Customized Names "Resin" Necklace</p>
+          <p>$60.00USD</p>
+          <a src="best2.html"><button >VIEW</button></a>
+          </div>
+        </div>
+
+        </div>
+      </section>
+      <hr />
+      <section class="footer1">
+        <div class="footer-content1">
+          <div>
+            <img
+              src="icons/delivery-truck.png"
+              alt="Delivery Truck"
+              style="height: 80px; width: 80px"
+            />
+            <p>Next Day Delivery After customization</p>
+          </div>
+          <div>
+            <img
+              src="icons/camera.png"
+              alt="Camera"
+              style="height: 80px; width: 80px"
+            />
+            <p>Satisfied or refunded</p>
+          </div>
+          <div>
+            <img
+              src="icons/gift-box.png"
+              alt="Gift Box"
+              style="height: 80px; width: 80px"
+            />
+            <p>GIFT BOX PACKAGING</p>
+          </div>
+          <div>
+            <img
+              src="icons/quality.png"
+              alt="Quality Guaranteed"
+              style="height: 80px; width: 80px"
+            />
+            <p>Quality Guaranteed</p>
+          </div>
+        </div>
+        <hr />
+        <div class="footer2">
+          <div class="footer-content2">
+            <ul class="social-media">
+              <li>
+                  <p>Follow us on social media:</p>
+                <a href="#"
+                  ><img
+                    src="icons/instagram.png"
+                    alt="Instagram"
+                    style="height: 100px; width: 100px"
+                /></a>
+              </li>
+            </ul>
+            
+          </div>
+          <div class="footer3">
+            <p>ASAMINA JEWELRY</p>
+            <p>
+              We customize personal, valuable and affordable jewelry as a gift for
+              yourself and your lovely people.
+            </p>
+          </div>
+        </div>
+      </section>
+      <div class="footer4">
+        <nav class="nav">
+          <ul>
+            <li><a href="Search.html">Search</a></li>
+            <li><a href="Refund.html">Refund and Return Policy</a></li>
+            <li><a href="shipping.html">Shipping Policy</a></li>
+            <li><a href="Terms.html">Terms of Service</a></li>
+          </ul>
+        </nav>
+      </div>
+      <script>
+        function toggleSidebar() {
+          const sidebar = document.getElementById("sidebar");
+          const overlay = document.getElementById("overlay");
+          sidebar.classList.toggle("active");
+          overlay.classList.toggle("active");
+        }
+        const images = ["images/p4.webp", "images/p6.webp"];
+        let index=0;
+        function changeBackground() {
+          document.body.style.backgroundImage = `url(${images[index]})`;
+          index = (index + 1) % images.length;}
+  
+        setInterval(changeBackground, 5000);
+  
+        let cart = [];
+  
+  function addToCart(name, price) {
+      let existingItem = cart.find(item => item.name === name);
+  
+      if (existingItem) {
+          existingItem.quantity += 1;
+      } else {
+          cart.push({ name, price, quantity: 1 });
+      }
+      updateCart();
+  }
+  
+  function updateCart() {
+      let cartList = document.getElementById("cart-list");
+      let totalElement = document.getElementById("total");
+      cartList.innerHTML = "";
+      let total = 0;
+  
+      cart.forEach((item, index) => {
+          total += item.price * item.quantity;
+          cartList.innerHTML += `
+              <li>
+                  ${item.name} - $${item.price} x ${item.quantity} 
+                  <button onclick="removeFromCart(${index})">Remove</button>
+              </li>
+          `;
+      });
+  
+      totalElement.innerText = total;
+  }
+  
+  function removeFromCart(index) {
+      cart.splice(index, 1);
+      updateCart();
+  }
+  
+  function clearCart() {
+      cart = [];
+      updateCart();
+  }
+  function toggleCart() {
+      let cartContainer = document.getElementById("cart-container");
+      if (cartContainer.style.display === "none" || cartContainer.style.display === "") {
+          cartContainer.style.display = "block";
+      } else {
+          cartContainer.style.display = "none";
+      }
+  }
+  
+  
+      </script>
+</body>
+</html>
